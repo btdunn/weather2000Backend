@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 
 const configuration = require('./knexfile').development
 const knex = require('knex')
@@ -12,6 +13,8 @@ Model.knex(database)
 class Weather extends Model {
   static tableName = 'weather'
 }
+
+app.use(cors())
 
 app.get('/', (request, response) => {
   Weather.query()
